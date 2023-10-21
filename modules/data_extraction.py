@@ -62,4 +62,4 @@ def data_(df):
         URL = row['URL']
         data_extraction(URL_ID, URL, index)
 
-    print('Extraction Done')
+    print('DATA EXTRACTION SUCCESSFUL')
