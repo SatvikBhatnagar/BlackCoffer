@@ -37,7 +37,7 @@ def data_(df):
         title = soup.find("h1")
         try:
             title_text = title.get_text()
-        except:
+        except AttributeError:
             error(URL_ID, 'Error on page')
             print('ERROR IN ARTICLE NUMBER{}, URL_ID: {}'.format(index, URL_ID))
             return  # exit the function
