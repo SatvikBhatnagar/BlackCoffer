@@ -9,7 +9,7 @@ headers = {
 def data_(df):
     """Assumes df an .xlsx file with first column having ID for articles and second column having URL of the articles
         Saves the articles in the 'files/text_data/' directory with URL_ID as the text file name and .txt as format"""
-
+    print('Total number of Articls: {}'.format(len(df)))
     def save_article_data(URL_ID, title, article):
         """Saves the article with Title and the paragraph in different lines with URL_ID as the text file name and
             .txt as file name"""
@@ -40,6 +40,7 @@ def data_(df):
         except AttributeError:
             error(URL_ID, 'Error on page')
             print('ERROR IN ARTICLE NUMBER{}, URL_ID: {}'.format(index, URL_ID))
+            print('CHECK ERROR IN URL WITH URL_ID: {} MANUALLY.'.format(URL_ID))
             return  # exit the function
 
         divs = soup.select("div.td-post-content.tagdiv-type")
