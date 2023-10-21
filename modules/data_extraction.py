@@ -7,7 +7,12 @@ headers = {
 
 
 def data_(df):
+    """Assumes df an .xlsx file with first column having ID for articles and second column having URL of the articles
+        Saves the articles in the 'files/text_data/' directory with URL_ID as the text file name and .txt as format"""
+
     def save_article_data(URL_ID, title, article):
+        """Saves the article with Title and the paragraph in different lines with URL_ID as the text file name and
+            .txt as file name"""
         text_file = "files/text_data/{}.txt".format(URL_ID)
 
         with open(text_file, 'w') as file:
@@ -23,6 +28,9 @@ def data_(df):
             file.write(f"{error}")
 
     def data_extraction(URL_ID, URL, index):
+        """Assumes URL as a valid URL of the article
+            Extracts the Title and Article form the URL"""
+
         print('Extracting article number {}'.format(index))
         r = requests.get(url=URL, headers=headers)
         soup = BeautifulSoup(r.text, 'html.parser')
@@ -32,7 +40,7 @@ def data_(df):
         except:
             error(URL_ID, 'Error on page')
             print('ERROR IN ARTICLE NUMBER{}, URL_ID: {}'.format(index, URL_ID))
-            return # exit the function
+            return  # exit the function
 
         divs = soup.select("div.td-post-content.tagdiv-type")
         paragraph = ''
@@ -47,7 +55,7 @@ def data_(df):
         print('Article number {} saved. Moving ahead.'.format(index))
 
     for index, row in df.iterrows():
-        index = index + 1 # index in the XLSX file
+        index = index + 1  # index in the XLSX file
         print('Working on article number {}'.format(index))
         URL_ID = row['URL_ID']
         URL = row['URL']
