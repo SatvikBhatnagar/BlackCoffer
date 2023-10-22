@@ -34,10 +34,10 @@ def negative_score_calculate():
                 words = file.readlines()
                 words = [word.rstrip('\n') for word in words]
 
-                negative_score = sum(1 for _ in words)  # calculates positive score
+                negative_score = sum(-1 for _ in words)  # calculates positive score
             url_id_txt = file_path.split('/')[-1]
             url_id = url_id_txt.split('.')[0]
-            negative_score_dict[url_id] = negative_score
+            negative_score_dict[url_id] = (negative_score * -1)
     return negative_score_dict
 
 
