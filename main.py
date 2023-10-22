@@ -12,7 +12,7 @@ if data_extraction == 'y':
 """
 
 # cleaning using Stop Words Lists
-#cw.cleaning()
+# cw.cleaning()
 
 # using Master Dictionary to separate positive negative words
-pns.positive_separation()
+pns.p_n_separation()
