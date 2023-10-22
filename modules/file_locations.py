@@ -24,3 +24,8 @@ def after_removing_stop_words_files():
     directory_path = "files/output/articles_after_removing_stop_words/"
     file = os.listdir(directory_path)
     return file
+
+def masteer_dictionary():
+    directory_path = "files/MasterDictionary/"
+    file = os.listdir(directory_path)
+    return file

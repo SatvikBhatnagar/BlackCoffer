@@ -15,4 +15,4 @@ if data_extraction == 'y':
 #cw.cleaning()
 
 # using Master Dictionary to separate positive negative words
-pns.positive_serperation()
+pns.positive_separation()
