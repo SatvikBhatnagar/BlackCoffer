@@ -18,3 +18,9 @@ def StopWordsFiles():
     directory_path = "files/StopWords/"
     stop_words_files = os.listdir(directory_path)
     return stop_words_files
+
+
+def after_removing_stop_words_files():
+    directory_path = "files/output/articles_after_removing_stop_words/"
+    file = os.listdir(directory_path)
+    return file
