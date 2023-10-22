@@ -14,7 +14,7 @@ def save_article(article, file_path):
     url_id = url_id_txt.split('.')[0]
     text_file = "files/output/articles_after_removing_stop_words/{}.txt".format(url_id)
     with open(text_file, 'w') as file:
-        article_text = '|'.join(article)
+        article_text = '\n'.join(article)
         file.write(article_text)
 
 
