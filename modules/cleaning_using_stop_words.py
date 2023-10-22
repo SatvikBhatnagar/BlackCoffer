@@ -7,11 +7,13 @@ def is_url(word):
     return "http://" in word or "https://" in word or "www." in word
 
 def save_article(article, file_path):
+    """Assumes the article is a list, file_path is the file path of the raw_article
+        Saves the article in files/output/articles_after_removing_stop_words/{}.txt with '|' as a seperator"""
     url_id_txt = file_path.split('/')[2]
     url_id = url_id_txt.split('.')[0]
     text_file = "files/output/articles_after_removing_stop_words/{}.txt".format(url_id)
     with open(text_file, 'w') as file:
-        article_text = ''.join(article)
+        article_text = '|'.join(article)
         file.write(article_text)
 
 
@@ -20,7 +22,7 @@ def cleaning():
     raw_articles = RawArticleFiles()
     stop_words_file = StopWordsFiles()
 
-    all_the_stop_words = []
+    all_the_stop_words = [] # list of all the stop words in lower case
 
     for file_name in stop_words_file:
         if file_name.endswith(".txt"):
@@ -51,8 +53,8 @@ def cleaning():
                 lines = file.readlines()
                 title = lines[0].strip()  # saves the first line as the title
                 article_content = ''.join(lines[1:])  # save rest of the article content to process
-        result = articles_without_stopWords(article_content, all_the_stop_words)
-        save_article(result, file_path)
+            result = articles_without_stopWords(article_content, all_the_stop_words) # list of the article as csv
+            save_article(result, file_path)
 
 
 
