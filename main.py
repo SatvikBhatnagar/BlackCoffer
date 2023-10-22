@@ -2,6 +2,7 @@ from modules import cleaning_using_stop_words as cw
 from modules import data_extraction as de
 from modules import file_locations as fl
 from modules import positive_negative_separation as pns
+from modules import sentiment_analysis as sa
 
 input_file = fl.input_file()  # reading and loading Input.xlsx
 
@@ -15,4 +16,6 @@ if data_extraction == 'y':
 # cw.cleaning()
 
 # using Master Dictionary to separate positive negative words
-pns.p_n_separation()
+# pns.p_n_separation()
+
+sa.sentiment_analysis()

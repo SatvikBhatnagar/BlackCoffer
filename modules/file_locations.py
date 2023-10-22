@@ -25,7 +25,20 @@ def after_removing_stop_words_files():
     file = os.listdir(directory_path)
     return file
 
-def masteer_dictionary():
+
+def master_dictionary():
     directory_path = "files/MasterDictionary/"
+    file = os.listdir(directory_path)
+    return file
+
+
+def positive_words():
+    directory_path = "files/output/positive_words_from_articles/"
+    file = os.listdir(directory_path)
+    return file
+
+
+def negative_words():
+    directory_path = "files/output/negative_words_from_articles/"
     file = os.listdir(directory_path)
     return file

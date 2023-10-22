@@ -1,8 +1,8 @@
 import os
-from .file_locations import after_removing_stop_words_files, masteer_dictionary
+from .file_locations import after_removing_stop_words_files, master_dictionary
 
 directory = after_removing_stop_words_files()
-Master_directory = masteer_dictionary()
+Master_directory = master_dictionary()
 
 positive_master = []  # list of all the positive words
 negative_master = []  # list of all the negative words
