@@ -6,6 +6,15 @@ def is_url(word):
     """Check if a word is a URL based on common patterns."""
     return "http://" in word or "https://" in word or "www." in word
 
+def save_article(article, file_path):
+    url_id_txt = file_path.split('/')[2]
+    url_id = url_id_txt.split('.')[0]
+    text_file = "files/output/articles_after_removing_stop_words/{}.txt".format(url_id)
+    with open(text_file, 'w') as file:
+        article_text = ''.join(article)
+        file.write(article_text)
+
+
 
 def cleaning():
     raw_articles = RawArticleFiles()
@@ -42,8 +51,8 @@ def cleaning():
                 lines = file.readlines()
                 title = lines[0].strip()  # saves the first line as the title
                 article_content = ''.join(lines[1:])  # save rest of the article content to process
-        print(articles_without_stopWords(article_content, all_the_stop_words))
-
+        result = articles_without_stopWords(article_content, all_the_stop_words)
+        save_article(result, file_path)
 
 
 
