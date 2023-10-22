@@ -1,1 +1,9 @@
-hype|bad|downside|badly|error|sloppy|smudged|expensive|difficult
+hype
+bad
+downside
+badly
+error
+sloppy
+smudged
+expensive
+difficult

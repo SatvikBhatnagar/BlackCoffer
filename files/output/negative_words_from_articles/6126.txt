@@ -1,1 +1,2 @@
-restricted|passive
+restricted
+passive

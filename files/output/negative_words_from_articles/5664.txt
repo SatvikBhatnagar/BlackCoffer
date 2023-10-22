@@ -1,1 +1,10 @@
-worsening|erratic|problems|severe|loss|urgent|lack|problems|infections|costly
+worsening
+erratic
+problems
+severe
+loss
+urgent
+lack
+problems
+infections
+costly

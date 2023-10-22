@@ -1,1 +1,6 @@
-critical|critical|problem|problems|worse|poorly
+critical
+critical
+problem
+problems
+worse
+poorly

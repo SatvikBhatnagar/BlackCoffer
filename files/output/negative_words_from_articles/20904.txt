@@ -1,1 +1,8 @@
-unimaginable|symptoms|illness|symptoms|urgent|repetitive|cancer|messy
+unimaginable
+symptoms
+illness
+symptoms
+urgent
+repetitive
+cancer
+messy

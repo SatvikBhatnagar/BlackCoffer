@@ -1,1 +1,6 @@
-threats|adversity|shock|issues|problem|problems
+threats
+adversity
+shock
+issues
+problem
+problems

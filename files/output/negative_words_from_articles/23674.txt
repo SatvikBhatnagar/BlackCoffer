@@ -1,1 +1,5 @@
-danger|threat|critical|risk|threat
+danger
+threat
+critical
+risk
+threat

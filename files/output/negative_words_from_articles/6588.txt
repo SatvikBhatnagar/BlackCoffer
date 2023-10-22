@@ -1,1 +1,8 @@
-bad|unhealthy|crude|worry|issue|adamant|toll|problems
+bad
+unhealthy
+crude
+worry
+issue
+adamant
+toll
+problems

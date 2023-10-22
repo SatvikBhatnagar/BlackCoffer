@@ -1,1 +1,10 @@
-clear|respect|ample|competitive|dynamic|important|knowledgeable|interesting|attractive|positive
+clear
+respect
+ample
+competitive
+dynamic
+important
+knowledgeable
+interesting
+attractive
+positive

@@ -1,1 +1,7 @@
-led|led|significant|enlighten|significant|unparalleled|unparalleled
+led
+led
+significant
+enlighten
+significant
+unparalleled
+unparalleled

@@ -1,1 +1,6 @@
-famous|success|successfully|success|fans|trust
+famous
+success
+successfully
+success
+fans
+trust

@@ -1,1 +1,2 @@
-contaminated|poverty
+contaminated
+poverty

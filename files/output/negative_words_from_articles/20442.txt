@@ -1,1 +1,5 @@
-fallen|sharply|overwhelmed|impossible|unable
+fallen
+sharply
+overwhelmed
+impossible
+unable

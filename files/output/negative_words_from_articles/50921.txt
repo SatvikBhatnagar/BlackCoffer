@@ -1,1 +1,6 @@
-risk|critical|critical|pain|fall|risk
+risk
+critical
+critical
+pain
+fall
+risk

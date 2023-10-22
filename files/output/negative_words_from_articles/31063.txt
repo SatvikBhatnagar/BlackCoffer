@@ -1,1 +1,13 @@
-disruptive|worried|catastrophic|interruptions|negative|falling|fear|danger|harassed|unable|loss|unable|drawback
+disruptive
+worried
+catastrophic
+interruptions
+negative
+falling
+fear
+danger
+harassed
+unable
+loss
+unable
+drawback

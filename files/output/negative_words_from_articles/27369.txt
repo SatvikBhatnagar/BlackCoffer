@@ -1,1 +1,9 @@
-problems|disaster|issues|spewing|harmful|costly|negative|complex|unreachable
+problems
+disaster
+issues
+spewing
+harmful
+costly
+negative
+complex
+unreachable

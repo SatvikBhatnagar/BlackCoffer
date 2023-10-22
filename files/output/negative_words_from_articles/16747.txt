@@ -1,1 +1,5 @@
-detrimental|risky|risk|struggled|jaded
+detrimental
+risky
+risk
+struggled
+jaded

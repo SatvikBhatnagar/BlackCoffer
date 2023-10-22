@@ -1,1 +1,3 @@
-failed|drastically|horrendous
+failed
+drastically
+horrendous

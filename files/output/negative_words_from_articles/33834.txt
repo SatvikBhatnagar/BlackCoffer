@@ -1,1 +1,4 @@
-complex|friction|hacks|critical
+complex
+friction
+hacks
+critical

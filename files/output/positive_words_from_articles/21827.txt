@@ -1,1 +1,4 @@
-mature|improved|significant|accurate
+mature
+improved
+significant
+accurate

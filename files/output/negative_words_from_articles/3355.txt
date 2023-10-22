@@ -1,1 +1,6 @@
-chronic|insecurity|difficulty|difficult|issue|limited
+chronic
+insecurity
+difficulty
+difficult
+issue
+limited

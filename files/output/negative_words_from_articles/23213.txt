@@ -1,1 +1,7 @@
-neglected|unable|concerns|vulnerable|severe|struggle|concerns
+neglected
+unable
+concerns
+vulnerable
+severe
+struggle
+concerns

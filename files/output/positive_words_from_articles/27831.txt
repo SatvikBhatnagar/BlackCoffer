@@ -1,1 +1,15 @@
-effective|agility|agility|ideal|comfortable|important|important|clear|valuable|rectifying|greatest|work|silent|tough|works
+effective
+agility
+agility
+ideal
+comfortable
+important
+important
+clear
+valuable
+rectifying
+greatest
+work
+silent
+tough
+works

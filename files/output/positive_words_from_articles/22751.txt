@@ -1,1 +1,4 @@
-patient|remarkable|success|happy
+patient
+remarkable
+success
+happy

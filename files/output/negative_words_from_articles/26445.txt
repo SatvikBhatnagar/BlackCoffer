@@ -1,1 +1,5 @@
-lame|naïve|fallacy|restricted|garbage
+lame
+naïve
+fallacy
+restricted
+garbage

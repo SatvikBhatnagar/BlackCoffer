@@ -1,1 +1,2 @@
-decline|issues
+decline
+issues

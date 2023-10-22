@@ -1,1 +1,14 @@
-limited|outcry|stranger|biased|stereotypical|penalty|worse|adverse|denied|biases|prejudices|queer|blind|harassment
+limited
+outcry
+stranger
+biased
+stereotypical
+penalty
+worse
+adverse
+denied
+biases
+prejudices
+queer
+blind
+harassment

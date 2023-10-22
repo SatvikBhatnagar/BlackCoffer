@@ -1,1 +1,10 @@
-instantly|support|support|patient|amenable|intelligence|empathy|leverage|precisely|benefit
+instantly
+support
+support
+patient
+amenable
+intelligence
+empathy
+leverage
+precisely
+benefit

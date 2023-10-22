@@ -1,1 +1,5 @@
-leading|support|protective|ease|positive
+leading
+support
+protective
+ease
+positive

@@ -15,7 +15,7 @@ def save_article(article, file_path, list_type):
     url_id = url_id_txt.split('.')[0]
     text_file = "files/output/{}_from_articles/{}.txt".format(list_type, url_id)
     with open(text_file, 'w') as file:
-        article_text = '|'.join(article)
+        article_text = '\n'.join(article)
         file.write(article_text)
 
 

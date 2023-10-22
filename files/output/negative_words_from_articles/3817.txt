@@ -1,1 +1,5 @@
-excessive|complex|waste|obsolete|break
+excessive
+complex
+waste
+obsolete
+break
