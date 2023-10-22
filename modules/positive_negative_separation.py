@@ -7,12 +7,12 @@ Master_directory = masteer_dictionary()
 positive_master = []  # list of all the positive words
 negative_master = []  # list of all the negative words
 
-def save_article(article, file_path):
+def save_article(article, file_path,list_type):
     """Assumes the article is a list, file_path is the file path of the raw_article
         Saves the article in files/output/articles_after_removing_stop_words/{}.txt with '|' as a seperator"""
     url_id_txt = file_path.split('/')[3]
     url_id = url_id_txt.split('.')[0]
-    text_file = "files/output/positive_words_from_articles/{}.txt".format(url_id)
+    text_file = "files/output/{}_from_articles/{}.txt".format(list_type,url_id)
     with open(text_file, 'w') as file:
         article_text = '|'.join(article)
         file.write(article_text)
@@ -45,13 +45,14 @@ def positive_separation():
             with open(file_path, 'r') as f:
                 line = f.read()
                 words = line.split('|')
-        positive_words = []
-        negative_words = []
+        positive_words_ = []
+        negative_words_ = []
         for word in words:
             if word in positive_master:
-                positive_words.append(word)
+                positive_words_.append(word)
             if word in negative_master:
-                negative_words.append(word)
-        save_article(positive_words, file_path)
+                negative_words_.append(word)
+        save_article(positive_words_, file_path, 'positive_words')
+        save_article(negative_words_, file_path, 'negative_words')
 
 MasterDict()
