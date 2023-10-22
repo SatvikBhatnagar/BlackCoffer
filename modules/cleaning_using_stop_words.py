@@ -6,6 +6,7 @@ def is_url(word):
     """Check if a word is a URL based on common patterns."""
     return "http://" in word or "https://" in word or "www." in word
 
+
 def save_article(article, file_path):
     """Assumes the article is a list, file_path is the file path of the raw_article
         Saves the article in files/output/articles_after_removing_stop_words/{}.txt with '|' as a seperator"""
@@ -17,12 +18,11 @@ def save_article(article, file_path):
         file.write(article_text)
 
 
-
 def cleaning():
     raw_articles = RawArticleFiles()
     stop_words_file = StopWordsFiles()
 
-    all_the_stop_words = [] # list of all the stop words in lower case
+    all_the_stop_words = []  # list of all the stop words in lower case
 
     for file_name in stop_words_file:
         if file_name.endswith(".txt"):
@@ -53,9 +53,8 @@ def cleaning():
                 lines = file.readlines()
                 title = lines[0].strip()  # saves the first line as the title
                 article_content = ''.join(lines[1:])  # save rest of the article content to process
-            result = articles_without_stopWords(article_content, all_the_stop_words) # list of the article as csv
+            result = articles_without_stopWords(article_content, all_the_stop_words)  # list of the article as csv
             save_article(result, file_path)
-
 
 
 if __name__ == "__main__":  # ensures that the file is executed if the script is run as the main program
