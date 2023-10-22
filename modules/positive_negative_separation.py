@@ -46,8 +46,8 @@ def p_n_separation():
         if file.endswith(".txt"):
             file_path = os.path.join("files/output/articles_after_removing_stop_words", file)
             with open(file_path, 'r') as f:
-                line = f.read()
-                words = line.split('|')
+                words = f.readlines()
+                words = [word.rstrip('\n') for word in words]
         positive_words_ = []
         negative_words_ = []
         for word in words:
