@@ -4,12 +4,11 @@ from .file_locations import positive_words, negative_words
 positive_words_directory = positive_words()
 negative_words_directory = negative_words()
 
-positive_score_dict = {}
-negative_score_dict = {}
-
 
 def positive_score_calculate():
     """Reads positive words from text file and store them in a dictionary with URL as key and score as value"""
+    positive_score_dict = {}
+
     for file_name in positive_words_directory:
         if file_name.endswith(".txt"):
             file_path = os.path.join("files/output/positive_words_from_articles", file_name)
@@ -21,10 +20,13 @@ def positive_score_calculate():
             url_id_txt = file_path.split('/')[-1]
             url_id = url_id_txt.split('.')[0]
             positive_score_dict[url_id] = positive_score
+    return positive_score_dict
 
 
 def negative_score_calculate():
     """Reads positive words from text file and store them in a dictionary with URL as key and score as value"""
+    negative_score_dict = {}
+
     for file_name in negative_words_directory:
         if file_name.endswith(".txt"):
             file_path = os.path.join("files/output/negative_words_from_articles", file_name)
@@ -36,8 +38,9 @@ def negative_score_calculate():
             url_id_txt = file_path.split('/')[-1]
             url_id = url_id_txt.split('.')[0]
             negative_score_dict[url_id] = negative_score
+    return negative_score_dict
 
 
 def sentiment_analysis():
-    positive_score_calculate()
-    negative_score_calculate()
+    positive_score = positive_score_calculate()
+    negative_score = negative_score_calculate()
