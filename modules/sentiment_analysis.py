@@ -40,16 +40,17 @@ def negative_score_calculate():
             negative_score_dict[url_id] = (negative_score * -1)
     return negative_score_dict
 
-def polarity_score(positive_score_dict, negative_score_dict):
+
+def polarity_score_calculate(positive_score_dict, negative_score_dict):
     for url_id, value_pos in positive_score_dict.items():
         value_neg = negative_score_dict.get(url_id)
         positive_score = value_pos
         negative_score = value_neg
         polarity_score_calc = (positive_score - negative_score) / ((positive_score + negative_score) + 0.000001)
-        print(polarity_score_calc)
+        return polarity_score_calc
 
 
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
-    polarity_score(positive_score, negative_score)
+    polarity_score = polarity_score_calculate(positive_score, negative_score)
