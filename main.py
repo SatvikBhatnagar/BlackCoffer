@@ -21,5 +21,5 @@ if data_extraction == 'y':
 
 # sa.sentiment_analysis()
 
-output_file = fl.output_file()
-write_output_file.write_output(input_file, fl.output_file)
+# output_file = fl.output_file()
+# write_output_file.write_output(input_file, fl.output_file)
