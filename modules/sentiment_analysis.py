@@ -54,6 +54,7 @@ def polarity_score_calculate(positive_score_dict, negative_score_dict):
 
 def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
     subjectivity_score_calc_dict = {}
+    number_of_total_words = {}
     for url_id, value_pos in positive_score_dict.items():
         value_neg = negative_score_dict.get(url_id)
 
@@ -66,8 +67,9 @@ def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
                     total_words_after_cleaning = len(words)
                     subjectivity_score_calculation = (value_pos + value_neg) / ((total_words_after_cleaning) + 0.000001)
                     subjectivity_score_calc_dict[url_id] = subjectivity_score_calculation
+                    number_of_total_words[url_id] = total_words_after_cleaning
 
-    return subjectivity_score_calc_dict
+    return subjectivity_score_calc_dict, number_of_total_words
 
 
 def average_sentence_length_calculate(positive_score_dict):
@@ -115,10 +117,23 @@ def complex_word_calculate(dictionary_that_has_url_id):
     return complex_word_calc_dict
 
 
+def percentage_of_complex_words_calculate(complex_word_count_dict, total_number_of_words_dict):
+    percentage_of_complex_words_calc_dict = {}
+    for url_id in complex_word_count_dict:
+        if url_id in total_number_of_words_dict:
+            total_words = total_number_of_words_dict[url_id]
+            complex_w_count = complex_word_count_dict[url_id]
+            percentage_of_complex_words_calculation = (complex_w_count / total_words) * 100
+            percentage_of_complex_words_calc_dict[url_id] = percentage_of_complex_words_calculation
+    return percentage_of_complex_words_calc_dict
+
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
     polarity_score = polarity_score_calculate(positive_score, negative_score)
-    subjectivity_score = subjectivity_score_calculate(positive_score, negative_score)
+    subjectivity_score, total_number_of_words = subjectivity_score_calculate(positive_score, negative_score)
     average_sentence_length = average_sentence_length_calculate(positive_score)
     complex_word_count = complex_word_calculate(positive_score)
+    percentage_of_complex_words = percentage_of_complex_words_calculate(complex_word_count, total_number_of_words)
+    print(percentage_of_complex_words)
