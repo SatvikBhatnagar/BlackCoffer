@@ -148,3 +148,4 @@ def sentiment_analysis():
     complex_word_count = complex_word_calculate(positive_score)
     percentage_of_complex_words = percentage_of_complex_words_calculate(complex_word_count, total_number_of_words)
     fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
+    average_number_of_words_per_sentence = average_sentence_length  # both have same formula
