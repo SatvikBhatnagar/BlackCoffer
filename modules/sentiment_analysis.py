@@ -221,7 +221,6 @@ def count_personal_pronouns(dict_that_has_url_id):
                     pronoun_count = len(personal_pronoun_matches)  # Count of personal pronouns
 
                     pronoun_count_dict[url_id] = pronoun_count
-    print(pronoun_count_dict)
     return pronoun_count_dict
 
 
