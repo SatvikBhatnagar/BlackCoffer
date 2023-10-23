@@ -11,9 +11,8 @@ negative_master = []  # list of all the negative words
 def save_article(article, file_path, list_type):
     """Assumes the article is a list, file_path is the file path of the raw_article
         Saves the article in files/output/articles_after_removing_stop_words/{}.txt with '|' as a seperator"""
-    url_id_txt = file_path.split('/')[3]
-    url_id = url_id_txt.split('.')[0]
-    text_file = "files/output/{}_from_articles/{}.txt".format(list_type, url_id)
+    url_id = file_path.split('/')[3]
+    text_file = "files/output/{}_from_articles/{}".format(list_type, url_id)
     with open(text_file, 'w') as file:
         article_text = '\n'.join(article)
         file.write(article_text)
