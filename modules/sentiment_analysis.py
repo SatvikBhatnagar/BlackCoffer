@@ -198,7 +198,7 @@ def syllable_counting_per_word(dict_that_has_url_id):
                         for word, count in zip(words, syllable_counts_list):
                             f.write(f"{word}:{count}\n")
                     total_syllables = sum(sy for sy in syllable_counts_list)
-                    syllable_count_dict[url_id] = (total_syllables, total_syllables / len(words))
+                    syllable_count_dict[url_id] = (total_syllables / len(words))
 
     return syllable_count_dict
 
@@ -215,7 +215,11 @@ def count_personal_pronouns(dict_that_has_url_id):
                     words = file.readlines()
                     words = [word.rstrip('\n') for word in words]
                     words = [remove_punctuation(word) for word in words]
-                    pronoun_counts = {pronoun: 0 for pronoun in ["I", "we", "my", "ours", "us"]}
+                    words = file.read()  # Read the entire content of the file as a string
+                    pronoun_counts = {pronoun: 0 for pronoun in ["I", "me", "myself", "we", "our", "us"]}
+                    for pronoun in pronoun_counts:
+                        pronoun_counts[pronoun] += len(re.findall(rf'\b{pronoun}\b', words, re.IGNORECASE))
+                    pronoun_dict[url_id] = pronoun_counts
                     for word in words:
                         # Special care to exclude the country name "US"
                         if word.lower() != "US":
@@ -227,6 +231,7 @@ def count_personal_pronouns(dict_that_has_url_id):
                                 else:
                                     pronoun_counts[match.lower()] += 1
                     pronoun_dict[url_id] = pronoun_counts
+    print(pronoun_dict)
 
     return pronoun_dict
 
@@ -268,7 +273,7 @@ def sentiment_analysis():
     syllable_count_per_word = syllable_counting_per_word(positive_score)
     personal_pronouns = count_personal_pronouns(positive_score)
     average_word_length = average_word_length_calculate(positive_score)
-
-    return (positive_score, negative_score, polarity_score, subjectivity_score, average_sentence_length, complex_word_count,
-            percentage_of_complex_words, fog_index, average_number_of_words_per_sentence, word_count, syllable_count_per_word,
+    print(personal_pronouns)
+    return (positive_score, negative_score, polarity_score, subjectivity_score, average_sentence_length,
+            percentage_of_complex_words, fog_index, average_number_of_words_per_sentence, complex_word_count, word_count, syllable_count_per_word,
             personal_pronouns, average_word_length)
