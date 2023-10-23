@@ -147,6 +147,7 @@ def remove_punctuation(word):
 
 
 def word_counting(dict_that_has_url_id):
+    word_counting_dict = {}
     for url_id in dict_that_has_url_id:
         for file_name in articles_after_removing_stop_words_directory:
             if file_name == f"{url_id}.txt":
@@ -154,9 +155,11 @@ def word_counting(dict_that_has_url_id):
                 with open(file_path, 'r', ) as file:
                     words = file.readlines()
                     words = [word.rstrip('\n') for word in words]
-                    # print(words)
                     words_without_punctuation = [remove_punctuation(word) for word in words]
-                    print(url_id, words_without_punctuation)
+                    cleaned_words = sum(1 for word in words_without_punctuation)
+                    word_counting_dict[url_id] = cleaned_words
+
+    return word_counting_dict
 
 
 def sentiment_analysis():
@@ -170,3 +173,4 @@ def sentiment_analysis():
     fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
     average_number_of_words_per_sentence = average_sentence_length  # both have same formula
     word_count = word_counting(positive_score)
+    print(word_count)
