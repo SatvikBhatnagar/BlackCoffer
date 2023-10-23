@@ -223,11 +223,6 @@ def count_personal_pronouns(dict_that_has_url_id):
                                     pronoun_counts[match.lower()] += 1
                     pronoun_dict[url_id] = pronoun_counts
 
-    # Total count of personal pronouns
-    # total_pronoun_count = sum(pronoun_counts.values())
-
-    # Display the counts for each pronoun
-
     return pronoun_dict
 
 
