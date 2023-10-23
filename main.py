@@ -3,6 +3,7 @@ from modules import data_extraction as de
 from modules import file_locations as fl
 from modules import positive_negative_separation as pns
 from modules import sentiment_analysis as sa
+from modules import write_output_file
 
 input_file = fl.input_file()  # reading and loading Input.xlsx
 
@@ -18,4 +19,7 @@ if data_extraction == 'y':
 # using Master Dictionary to separate positive negative words
 # pns.p_n_separation()
 
-sa.sentiment_analysis()
+# sa.sentiment_analysis()
+
+output_file = fl.output_file()
+write_output_file.write_output(input_file, fl.output_file)

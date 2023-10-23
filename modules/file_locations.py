@@ -42,3 +42,9 @@ def negative_words():
     directory_path = "files/output/negative_words_from_articles/"
     file = os.listdir(directory_path)
     return file
+
+
+def output_file():
+    file = "files/output/output_data_structure.csv"
+    df = pd.read_csv(file)
+    return df

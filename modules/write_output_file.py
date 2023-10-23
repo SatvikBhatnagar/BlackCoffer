@@ -1,7 +1,10 @@
-from .file_locations import input_file as i_file
+from modules import sentiment_analysis as s_a
 import pandas as pd
 
-input_file = pd.read_excel(i_file)
+def write_output(input_file, output_file):
+    values = {}
 
-url_ids = data.iloc[:, 0]
-urls = data.iloc[:, 1]
+    for index, row in input_file.iterrows():
+        url_id = row['URL_ID']
+        url = row['URL']
+        values[url_id] = url
