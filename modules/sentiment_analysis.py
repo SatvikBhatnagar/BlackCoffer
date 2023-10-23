@@ -128,6 +128,17 @@ def percentage_of_complex_words_calculate(complex_word_count_dict, total_number_
     return percentage_of_complex_words_calc_dict
 
 
+def fog_index_calculate(percentage_of_complex_words_dict, average_sentence_length_dict):
+    fog_index_dict = {}
+    for url_id in percentage_of_complex_words_dict:
+        if url_id in average_sentence_length_dict:
+            avg_sentence_len = average_sentence_length_dict[url_id]
+            percentage_complex_w = percentage_of_complex_words_dict[url_id]
+            fog_index = 0.4 * (avg_sentence_len + percentage_complex_w)
+            fog_index_dict[url_id] = fog_index
+    return fog_index_dict
+
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
@@ -136,4 +147,5 @@ def sentiment_analysis():
     average_sentence_length = average_sentence_length_calculate(positive_score)
     complex_word_count = complex_word_calculate(positive_score)
     percentage_of_complex_words = percentage_of_complex_words_calculate(complex_word_count, total_number_of_words)
-    print(percentage_of_complex_words)
+    fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
+    print(fog_index)
