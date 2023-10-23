@@ -204,9 +204,9 @@ def syllable_counting_per_word(dict_that_has_url_id):
 
 
 def count_personal_pronouns(dict_that_has_url_id):
-    pronoun_dict = {}
+    pronoun_count_dict = {}
     personal_pronouns = ["I", "me", "myself", "we", "our", "us"]
-    pattern = r"\b(" + "|".join(map(re.escape, personal_pronouns)) + r")\b"
+    pattern = r"\b(?!" + "|".join(map(re.escape, ['US'])) + r")(" + "|".join(map(re.escape, personal_pronouns)) + r")\b"
 
     for url_id in dict_that_has_url_id:
         for file_name in articles_after_removing_stop_words_directory:
@@ -218,25 +218,11 @@ def count_personal_pronouns(dict_that_has_url_id):
                     words = [remove_punctuation(word) for word in words]
 
                     personal_pronoun_matches = [word for word in words if re.search(pattern, word, re.IGNORECASE)]
-                    if personal_pronoun_matches:
-                        print("Personal pronouns found:", personal_pronoun_matches)
-                    else:
-                        print("No personal pronouns found in the list of words.")
+                    pronoun_count = len(personal_pronoun_matches)  # Count of personal pronouns
 
-                    # for word in words:
-                    #     # Special care to exclude the country name "US"
-                    #     if word.lower() != "US":
-                    #         pronoun_matches = re.findall(pronoun_pattern, word, re.IGNORECASE)
-                    #         # Count the number of matches and update the counts in the dictionary
-                    #         for match in pronoun_matches:
-                    #             if match == "i" or match == 'I':
-                    #                 pronoun_counts['I'] += 1
-                    #             else:
-                    #                 pronoun_counts[match.lower()] += 1
-                    # pronoun_dict[url_id] = pronoun_counts
-    # print(pronoun_dict)
-
-    return pronoun_dict
+                    pronoun_count_dict[url_id] = pronoun_count
+    print(pronoun_count_dict)
+    return pronoun_count_dict
 
 
 def average_word_length_calculate(dictionary_that_has_url_id):

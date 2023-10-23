@@ -21,5 +21,5 @@ input_file = fl.input_file()  # reading and loading Input.xlsx
 
 sa.sentiment_analysis()
 #
-# output_file = fl.output_file()
-# write_output_file.write_output(input_file, output_file)
+output_file = fl.output_file()
+write_output_file.write_output(input_file, output_file)
