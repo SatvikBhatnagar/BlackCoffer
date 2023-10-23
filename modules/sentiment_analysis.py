@@ -46,12 +46,15 @@ def negative_score_calculate():
 
 
 def polarity_score_calculate(positive_score_dict, negative_score_dict):
+    polarity_scores_dict = {}
     for url_id, value_pos in positive_score_dict.items():
         value_neg = negative_score_dict.get(url_id)
         positive_score = value_pos
         negative_score = value_neg
         polarity_score_calc = (positive_score - negative_score) / ((positive_score + negative_score) + 0.000001)
-    return polarity_score_calc
+
+        polarity_scores_dict[url_id] = polarity_score_calc
+    return polarity_scores_dict
 
 
 def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
