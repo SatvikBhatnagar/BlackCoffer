@@ -162,6 +162,41 @@ def word_counting(dict_that_has_url_id):
     return word_counting_dict
 
 
+def syllable_counting_per_word(dict_that_has_url_id):
+    syllable_count_dict = {}
+    for url_id in dict_that_has_url_id:
+        for file_name in articles_after_removing_stop_words_directory:
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r') as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    words = [remove_punctuation(word) for word in words]
+                    syllable_counts_list = []
+
+                    for word in words:
+                        exceptions = ["es", "ed"]
+                        is_exception = False
+                        for exception in exceptions:
+                            if word.endswith(exception):
+                                is_exception = True
+                                break
+                        if is_exception:
+                            syllables = 1
+                        else:
+                            syllables = count_syllables(word)
+                        syllable_counts_list.append(syllables)
+
+                    text_file = "files/output/syllable_count_per_word/{}.txt".format(url_id)
+                    with open(text_file, 'w') as f:
+                        for word, count in zip(words, syllable_counts_list):
+                            f.write(f"{word}:{count}\n")
+                    total_syllables = sum(sy for sy in syllable_counts_list)
+                    syllable_count_dict[url_id] = total_syllables
+
+    return syllable_count_dict
+
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
@@ -173,4 +208,5 @@ def sentiment_analysis():
     fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
     average_number_of_words_per_sentence = average_sentence_length  # both have same formula
     word_count = word_counting(positive_score)
-    print(word_count)
+    syllable_count_per_word = syllable_counting_per_word(positive_score)
+    print(syllable_count_per_word)
