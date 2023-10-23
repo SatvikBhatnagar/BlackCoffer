@@ -263,4 +263,7 @@ def sentiment_analysis():
     syllable_count_per_word = syllable_counting_per_word(positive_score)
     personal_pronouns = count_personal_pronouns(positive_score)
     average_word_length = average_word_length_calculate(positive_score)
-    print(average_word_length)
+
+    return (positive_score, negative_score, polarity_score, subjectivity_score, average_sentence_length, complex_word_count,
+            percentage_of_complex_words, fog_index, average_number_of_words_per_sentence, word_count, syllable_count_per_word,
+            personal_pronouns, average_word_length)
