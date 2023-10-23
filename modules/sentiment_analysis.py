@@ -22,7 +22,8 @@ def positive_score_calculate():
 
                 positive_score = sum(1 for _ in words)  # calculates positive score
             url_id_txt = file_path.split('/')[-1]
-            url_id = url_id_txt.split('.')[0]
+            url_id_parts = url_id_txt.split('.')
+            url_id = float(f"{url_id_parts[0]}.{url_id_parts[1]}")
             positive_score_dict[url_id] = positive_score
     return positive_score_dict
 
@@ -40,7 +41,8 @@ def negative_score_calculate():
 
                 negative_score = sum(-1 for _ in words)  # calculates positive score
             url_id_txt = file_path.split('/')[-1]
-            url_id = url_id_txt.split('.')[0]
+            url_id_parts = url_id_txt.split('.')
+            url_id = float(f"{url_id_parts[0]}.{url_id_parts[1]}")
             negative_score_dict[url_id] = (negative_score * -1)
     return negative_score_dict
 
@@ -254,6 +256,7 @@ def average_word_length_calculate(dictionary_that_has_url_id):
 
 def sentiment_analysis():
     positive_score = positive_score_calculate()
+    print(positive_score)
     negative_score = negative_score_calculate()
     polarity_score = polarity_score_calculate(positive_score, negative_score)
     subjectivity_score, total_number_of_words = subjectivity_score_calculate(positive_score, negative_score)
