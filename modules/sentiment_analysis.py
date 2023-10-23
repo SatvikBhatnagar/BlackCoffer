@@ -69,8 +69,28 @@ def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
     return subjectivity_score_calc_dict
 
 
+def average_sentence_length_calculate(positive_score_dict):
+    average_sentence_length_calc_dict = {}
+    for url_id, value_pos in positive_score_dict.items():
+        for file_name in articles_after_removing_stop_words_directory:
+            sentences = 0
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r', ) as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    for word in words:
+                        if word.endswith('.'):
+                            sentences += 1
+                    average_sentence_length_calc = len(words)/sentences
+                    average_sentence_length_calc_dict[url_id] = average_sentence_length_calc
+
+    return average_sentence_length_calc_dict
+
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
     polarity_score = polarity_score_calculate(positive_score, negative_score)
     subjectivity_score = subjectivity_score_calculate(positive_score, negative_score)
+    average_sentence_length = average_sentence_length_calculate(positive_score)
