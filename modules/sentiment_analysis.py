@@ -192,7 +192,7 @@ def syllable_counting_per_word(dict_that_has_url_id):
                         for word, count in zip(words, syllable_counts_list):
                             f.write(f"{word}:{count}\n")
                     total_syllables = sum(sy for sy in syllable_counts_list)
-                    syllable_count_dict[url_id] = total_syllables
+                    syllable_count_dict[url_id] = (total_syllables, total_syllables/len(words))
 
     return syllable_count_dict
 
