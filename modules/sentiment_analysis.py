@@ -1,5 +1,6 @@
 import os
 from .file_locations import positive_words, negative_words, after_removing_stop_words_files
+import pyphen
 
 positive_words_directory = positive_words()
 negative_words_directory = negative_words()
@@ -82,10 +83,36 @@ def average_sentence_length_calculate(positive_score_dict):
                     for word in words:
                         if word.endswith('.'):
                             sentences += 1
-                    average_sentence_length_calc = len(words)/sentences
+                    average_sentence_length_calc = len(words) / sentences
                     average_sentence_length_calc_dict[url_id] = average_sentence_length_calc
 
     return average_sentence_length_calc_dict
+
+
+dic = pyphen.Pyphen(lang='en')
+
+
+def count_syllables(word):
+    return len(dic.inserted(word).split("-"))  # breaks down the word in syllables
+
+
+def complex_word_calculate(dictionary_that_has_url_id):
+    complex_word_calc_dict = {}
+    for url_id, value_pos in dictionary_that_has_url_id.items():
+        for file_name in articles_after_removing_stop_words_directory:
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r', ) as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    total_words = len(words)
+                    complex_word_count = 0
+                    for word in words:
+                        if count_syllables(word) > 2:
+                            complex_word_count += 1
+
+                    complex_word_calc_dict[url_id] = complex_word_count
+    return complex_word_calc_dict
 
 
 def sentiment_analysis():
@@ -94,3 +121,4 @@ def sentiment_analysis():
     polarity_score = polarity_score_calculate(positive_score, negative_score)
     subjectivity_score = subjectivity_score_calculate(positive_score, negative_score)
     average_sentence_length = average_sentence_length_calculate(positive_score)
+    complex_word_count = complex_word_calculate(positive_score)
