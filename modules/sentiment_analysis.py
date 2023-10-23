@@ -226,6 +226,29 @@ def count_personal_pronouns(dict_that_has_url_id):
     return pronoun_dict
 
 
+def average_word_length_calculate(dictionary_that_has_url_id):
+    average_word_length_calc_dict = {}
+    for url_id in dictionary_that_has_url_id:
+        for file_name in articles_after_removing_stop_words_directory:
+            total_chars = 0
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r', ) as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    words = [remove_punctuation(word) for word in words]
+                    # print(words)
+                    for word in words:
+                        total_chars += len(word)
+                    if total_chars > 0:
+                        average_word_length_calc = total_chars / len(words)
+                    else:
+                        average_word_length_calc = 0
+                average_word_length_calc_dict[url_id] = average_word_length_calc
+
+    return average_word_length_calc_dict
+
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
@@ -239,4 +262,5 @@ def sentiment_analysis():
     word_count = word_counting(positive_score)
     syllable_count_per_word = syllable_counting_per_word(positive_score)
     personal_pronouns = count_personal_pronouns(positive_score)
-    print(personal_pronouns)
+    average_word_length = average_word_length_calculate(positive_score)
+    print(average_word_length)
