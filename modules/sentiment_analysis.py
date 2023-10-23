@@ -1,8 +1,9 @@
 import os
-from .file_locations import positive_words, negative_words
+from .file_locations import positive_words, negative_words, after_removing_stop_words_files
 
 positive_words_directory = positive_words()
 negative_words_directory = negative_words()
+articles_after_removing_stop_words_directory = after_removing_stop_words_files()
 
 
 def positive_score_calculate():
@@ -50,7 +51,26 @@ def polarity_score_calculate(positive_score_dict, negative_score_dict):
         return polarity_score_calc
 
 
+def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
+    subjectivity_score_calc_dict = {}
+    for url_id, value_pos in positive_score_dict.items():
+        value_neg = negative_score_dict.get(url_id)
+
+        for file_name in articles_after_removing_stop_words_directory:
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r', ) as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    total_words_after_cleaning = len(words)
+                    subjectivity_score_calculation = (value_pos + value_neg) / ((total_words_after_cleaning) + 0.000001)
+                    subjectivity_score_calc_dict[url_id] = subjectivity_score_calculation
+
+    return subjectivity_score_calc_dict
+
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
     polarity_score = polarity_score_calculate(positive_score, negative_score)
+    subjectivity_score = subjectivity_score_calculate(positive_score, negative_score)
