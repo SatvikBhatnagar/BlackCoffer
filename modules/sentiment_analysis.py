@@ -1,6 +1,7 @@
 import os
 from .file_locations import positive_words, negative_words, after_removing_stop_words_files
 import pyphen
+import string
 
 positive_words_directory = positive_words()
 negative_words_directory = negative_words()
@@ -100,7 +101,7 @@ def count_syllables(word):
 
 def complex_word_calculate(dictionary_that_has_url_id):
     complex_word_calc_dict = {}
-    for url_id, value_pos in dictionary_that_has_url_id.items():
+    for url_id in dictionary_that_has_url_id:
         for file_name in articles_after_removing_stop_words_directory:
             if file_name == f"{url_id}.txt":
                 file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
@@ -139,6 +140,24 @@ def fog_index_calculate(percentage_of_complex_words_dict, average_sentence_lengt
     return fog_index_dict
 
 
+def remove_punctuation(word):
+    translator = str.maketrans('', '', string.punctuation)
+    clean_word = word.translate(translator)
+    return clean_word
+
+
+def word_count(dict_that_has_url_id):
+    for url_id in dict_that_has_url_id:
+        for file_name in articles_after_removing_stop_words_directory:
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r', ) as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    # print(words)
+                    words_without_punctuation = [remove_punctuation(word) for word in words]
+                    print(url_id, words_without_punctuation)
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
@@ -149,3 +168,4 @@ def sentiment_analysis():
     percentage_of_complex_words = percentage_of_complex_words_calculate(complex_word_count, total_number_of_words)
     fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
     average_number_of_words_per_sentence = average_sentence_length  # both have same formula
+    word_count(positive_score)
