@@ -72,9 +72,9 @@ def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
     return subjectivity_score_calc_dict, number_of_total_words
 
 
-def average_sentence_length_calculate(positive_score_dict):
+def average_sentence_length_calculate(dictionary_that_has_url_id):
     average_sentence_length_calc_dict = {}
-    for url_id, value_pos in positive_score_dict.items():
+    for url_id in dictionary_that_has_url_id:
         for file_name in articles_after_removing_stop_words_directory:
             sentences = 0
             if file_name == f"{url_id}.txt":
@@ -148,4 +148,3 @@ def sentiment_analysis():
     complex_word_count = complex_word_calculate(positive_score)
     percentage_of_complex_words = percentage_of_complex_words_calculate(complex_word_count, total_number_of_words)
     fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
-    print(fog_index)
