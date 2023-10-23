@@ -205,7 +205,8 @@ def syllable_counting_per_word(dict_that_has_url_id):
 
 def count_personal_pronouns(dict_that_has_url_id):
     pronoun_dict = {}
-    pronoun_pattern = r'\b(I|we|my|ours|us)\b'
+    personal_pronouns = ["I", "me", "myself", "we", "our", "us"]
+    pattern = r"\b(" + "|".join(map(re.escape, personal_pronouns)) + r")\b"
 
     for url_id in dict_that_has_url_id:
         for file_name in articles_after_removing_stop_words_directory:
@@ -215,23 +216,25 @@ def count_personal_pronouns(dict_that_has_url_id):
                     words = file.readlines()
                     words = [word.rstrip('\n') for word in words]
                     words = [remove_punctuation(word) for word in words]
-                    words = file.read()  # Read the entire content of the file as a string
-                    pronoun_counts = {pronoun: 0 for pronoun in ["I", "me", "myself", "we", "our", "us"]}
-                    for pronoun in pronoun_counts:
-                        pronoun_counts[pronoun] += len(re.findall(rf'\b{pronoun}\b', words, re.IGNORECASE))
-                    pronoun_dict[url_id] = pronoun_counts
-                    for word in words:
-                        # Special care to exclude the country name "US"
-                        if word.lower() != "US":
-                            pronoun_matches = re.findall(pronoun_pattern, word, re.IGNORECASE)
-                            # Count the number of matches and update the counts in the dictionary
-                            for match in pronoun_matches:
-                                if match == "i" or match == 'I':
-                                    pronoun_counts['I'] += 1
-                                else:
-                                    pronoun_counts[match.lower()] += 1
-                    pronoun_dict[url_id] = pronoun_counts
-    print(pronoun_dict)
+
+                    personal_pronoun_matches = [word for word in words if re.search(pattern, word, re.IGNORECASE)]
+                    if personal_pronoun_matches:
+                        print("Personal pronouns found:", personal_pronoun_matches)
+                    else:
+                        print("No personal pronouns found in the list of words.")
+
+                    # for word in words:
+                    #     # Special care to exclude the country name "US"
+                    #     if word.lower() != "US":
+                    #         pronoun_matches = re.findall(pronoun_pattern, word, re.IGNORECASE)
+                    #         # Count the number of matches and update the counts in the dictionary
+                    #         for match in pronoun_matches:
+                    #             if match == "i" or match == 'I':
+                    #                 pronoun_counts['I'] += 1
+                    #             else:
+                    #                 pronoun_counts[match.lower()] += 1
+                    # pronoun_dict[url_id] = pronoun_counts
+    # print(pronoun_dict)
 
     return pronoun_dict
 
@@ -273,7 +276,6 @@ def sentiment_analysis():
     syllable_count_per_word = syllable_counting_per_word(positive_score)
     personal_pronouns = count_personal_pronouns(positive_score)
     average_word_length = average_word_length_calculate(positive_score)
-    print(personal_pronouns)
     return (positive_score, negative_score, polarity_score, subjectivity_score, average_sentence_length,
             percentage_of_complex_words, fog_index, average_number_of_words_per_sentence, complex_word_count, word_count, syllable_count_per_word,
             personal_pronouns, average_word_length)
