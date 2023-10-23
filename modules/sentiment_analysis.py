@@ -66,7 +66,7 @@ def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
                     words = file.readlines()
                     words = [word.rstrip('\n') for word in words]
                     total_words_after_cleaning = len(words)
-                    subjectivity_score_calculation = (value_pos + value_neg) / ((total_words_after_cleaning) + 0.000001)
+                    subjectivity_score_calculation = (value_pos + value_neg) / (total_words_after_cleaning + 0.000001)
                     subjectivity_score_calc_dict[url_id] = subjectivity_score_calculation
                     number_of_total_words[url_id] = total_words_after_cleaning
 
@@ -146,7 +146,7 @@ def remove_punctuation(word):
     return clean_word
 
 
-def word_count(dict_that_has_url_id):
+def word_counting(dict_that_has_url_id):
     for url_id in dict_that_has_url_id:
         for file_name in articles_after_removing_stop_words_directory:
             if file_name == f"{url_id}.txt":
@@ -158,6 +158,7 @@ def word_count(dict_that_has_url_id):
                     words_without_punctuation = [remove_punctuation(word) for word in words]
                     print(url_id, words_without_punctuation)
 
+
 def sentiment_analysis():
     positive_score = positive_score_calculate()
     negative_score = negative_score_calculate()
@@ -168,4 +169,4 @@ def sentiment_analysis():
     percentage_of_complex_words = percentage_of_complex_words_calculate(complex_word_count, total_number_of_words)
     fog_index = fog_index_calculate(percentage_of_complex_words, average_sentence_length)
     average_number_of_words_per_sentence = average_sentence_length  # both have same formula
-    word_count(positive_score)
+    word_count = word_counting(positive_score)
