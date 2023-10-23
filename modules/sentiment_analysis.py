@@ -2,6 +2,7 @@ import os
 from .file_locations import positive_words, negative_words, after_removing_stop_words_files
 import pyphen
 import string
+import re
 
 positive_words_directory = positive_words()
 negative_words_directory = negative_words()
@@ -50,7 +51,7 @@ def polarity_score_calculate(positive_score_dict, negative_score_dict):
         positive_score = value_pos
         negative_score = value_neg
         polarity_score_calc = (positive_score - negative_score) / ((positive_score + negative_score) + 0.000001)
-        return polarity_score_calc
+    return polarity_score_calc
 
 
 def subjectivity_score_calculate(positive_score_dict, negative_score_dict):
@@ -192,9 +193,42 @@ def syllable_counting_per_word(dict_that_has_url_id):
                         for word, count in zip(words, syllable_counts_list):
                             f.write(f"{word}:{count}\n")
                     total_syllables = sum(sy for sy in syllable_counts_list)
-                    syllable_count_dict[url_id] = (total_syllables, total_syllables/len(words))
+                    syllable_count_dict[url_id] = (total_syllables, total_syllables / len(words))
 
     return syllable_count_dict
+
+
+def count_personal_pronouns(dict_that_has_url_id):
+    pronoun_dict = {}
+    pronoun_pattern = r'\b(I|we|my|ours|us)\b'
+
+    for url_id in dict_that_has_url_id:
+        for file_name in articles_after_removing_stop_words_directory:
+            if file_name == f"{url_id}.txt":
+                file_path = os.path.join("files/output/articles_after_removing_stop_words", file_name)
+                with open(file_path, 'r') as file:
+                    words = file.readlines()
+                    words = [word.rstrip('\n') for word in words]
+                    words = [remove_punctuation(word) for word in words]
+                    pronoun_counts = {pronoun: 0 for pronoun in ["I", "we", "my", "ours", "us"]}
+                    for word in words:
+                        # Special care to exclude the country name "US"
+                        if word.lower() != "US":
+                            pronoun_matches = re.findall(pronoun_pattern, word, re.IGNORECASE)
+                            # Count the number of matches and update the counts in the dictionary
+                            for match in pronoun_matches:
+                                if match == "i" or match == 'I':
+                                    pronoun_counts['I'] += 1
+                                else:
+                                    pronoun_counts[match.lower()] += 1
+                    pronoun_dict[url_id] = pronoun_counts
+
+    # Total count of personal pronouns
+    # total_pronoun_count = sum(pronoun_counts.values())
+
+    # Display the counts for each pronoun
+
+    return pronoun_dict
 
 
 def sentiment_analysis():
@@ -209,4 +243,5 @@ def sentiment_analysis():
     average_number_of_words_per_sentence = average_sentence_length  # both have same formula
     word_count = word_counting(positive_score)
     syllable_count_per_word = syllable_counting_per_word(positive_score)
-    print(syllable_count_per_word)
+    personal_pronouns = count_personal_pronouns(positive_score)
+    print(personal_pronouns)
